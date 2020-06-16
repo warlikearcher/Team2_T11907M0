@@ -22,7 +22,7 @@ switch ($acc) {
     default :
         break;
 }
-
+//add cart
 if (isset($_POST["add_to_cart"])) {
     if (isset($_SESSION["cart"])) {
         $item_array_id = array_column($_SESSION["cart"], "item_id");
@@ -35,14 +35,12 @@ if (isset($_POST["add_to_cart"])) {
                 'item_quantity' => $_POST["quantity"]
             );
             $_SESSION["cart"][$count] = $item_array;
-        } else {
-            echo '<script>alert("Sản phẩm đã có trong giỏ hàng")</script>';
         }
     } else {
         $item_array = array(
-            'item_id' => $_GET["idProduct"],
-            'item_name' => $_POST["nameProduct"],
-            'item_price' => $_POST["rate"],
+            'item_id' => $_GET["id"],
+            'item_name' => $_POST["hidden_name"],
+            'item_price' => $_POST["hidden_price"],
             'item_quantity' => $_POST["quantity"]
         );
         $_SESSION["cart"][0] = $item_array;
@@ -58,6 +56,27 @@ if (isset($_GET["action"])) {
         }
     }
 }
+//end add cart
+//add promo code
+$code_promo_n = "";
+$promo_code = "";
+$promo_alert = false;
+if (isset($_POST["add_promo"])) {
+    $code_promo_n = $_POST["promo_code"];
+}
+switch ($code_promo_n) {
+    case 'newbie':
+        $promo_code = 0.2;
+        break;
+    case 'saigon':
+        $promo_code = 0.1;
+        break;
+    default :
+        $promo_alert = true;
+        break;
+}
+//end add promo code
+
 ?>
 <!DOCTYPE html>
 <!--
@@ -92,91 +111,60 @@ and open the template in the editor.
                     xmlhttp.send();
                 }
             }
+
         </script>
 
     </head>
     <body>
+        <?php include 'client/view/header.php'; ?>
+
+        <main>
+            <?php
+            if (!isset($_GET['view'])) {
+                $view = "";
+            } else {
+                $view = $_GET['view'];
+            }
+            switch ($view) {
+                case "home":
+                    include 'client/view/vertical_menu.php';
+                    include 'client/view/section.php';
+                    break;
+
+                case "review":
+                    include 'client/view/review.php';
+                    break;
+                case "product":
+                    include 'client/section_product.php';
+                    break;
+                case "product_inf":
+                    include 'client/section_product_inf.php';
+                    break;
+                case "promo":
+                    include 'client/view/promo.php';
+                    break;
+                case "contact":
+                    include 'client/view/contact.php';
+                    break;
+                case "user":
+                    include 'client/view/user.php';
+                    break;
+                case "cart":
+                    include 'client/view/cart_view.php';
+                    break;
+                case "payment":
+                    include 'client/view/payment.php';
+                    break;
+                default :
+                    include 'client/view/vertical_menu.php';
+                    include 'client/view/section.php';
+                    break;
+            }
+            ?>
+        </main>
+
         <?php
-        include 'client/view/header.php';
-
-
-
-        if (!isset($_GET['view'])) {
-            $view = "";
-        } else {
-            $view = $_GET['view'];
-        }
-        switch ($view) {
-            case "home":
-                include 'client/view/vertical_menu.php';
-                include 'client/view/section.php';
-                break;
-
-            case "review":
-                include 'client/view/review.php';
-                break;
-            case "product":
-                include 'client/section_product.php';
-                break;
-            case "product_inf":
-                include 'client/section_product_inf.php';
-                break;
-            case "promo":
-                include 'client/view/promo.php';
-                break;
-            case "contact":
-                include 'client/view/contact.php';
-                break;
-            case "user":
-                include 'client/view/user.php';
-                break;
-            case "cart":
-                include 'client/view/cart_view.php';
-                break;
-            default :
-                include 'client/view/vertical_menu.php';
-                include 'client/view/section.php';
-                break;
-        }
-
         include 'client/view/footer.php';
         ?>
-        <h3>Giỏ hàng</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <tr>
-                    <th width="40%">Tên sản phẩm</th>
-                    <th width="10%">Số lượng</th>
-                    <th width="20%">Giá</th>
-                    <th width="15%">Tổng</th>
-                    <th width="5%"></th>
-                </tr>
-                <?php
-                if (!empty($_SESSION["cart"])) {
-                    $total = 0;
-                    foreach ($_SESSION["cart"] as $keys => $values) {
-                        ?>
-                        <tr>
-                            <td><?php echo $values["item_name"]; ?></td>
-                            <td><?php echo $values["item_quantity"]; ?></td>
-                            <td>$ <?php echo $values["item_price"]; ?></td>
-                            <td>$ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2); ?></td>
-                            <td><a href="index.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
-                        </tr>
-                        <?php
-                        $total = $total + ($values["item_quantity"] * $values["item_price"]);
-                    }
-                    ?>
-                    <tr>
-                        <td colspan="3" align="right">Total</td>
-                        <td align="right">$ <?php echo number_format($total, 2); ?></td>
-                        <td></td>
-                    </tr>
-                    <?php
-                }
-                ?>
-
-            </table>
-        </div>
     </body> 
 </html>
