@@ -71,8 +71,8 @@
             </div>
             <div class="col-md-3 right-menu">
                 <?php
-                if (!empty($_SESSION["cart"])) {
-                    $cart_count = count(array_keys($_SESSION["cart"]));
+                if (!empty($_SESSION["cart_item"])) {
+                    $cart_count = count(array_keys($_SESSION["cart_item"]));
                     ?>
                     <ul class="nav navbar-nav cart_div" id="list-nav">
                         <li class="cart" id="buttonCart"><a href="?view=cart">Giỏ Hàng <span class="fa fa-shopping-cart"></span><span>(<?php echo $cart_count; ?>)</span></a></li>

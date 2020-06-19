@@ -2,6 +2,8 @@
 session_start();
 include_once (__DIR__ . "..\config\database\connectDB.php");
 require (__DIR__ . "..\config\model\load_random.php");
+require_once("dbcontroller.php");
+$db_handle = new DBController();
 $result_a = mysqli_query($link, $sql_a);
 $result_b = mysqli_query($link, $sql_b);
 $result_test = mysqli_query($link, "select * from tblaptoplist  limit 0,4;");
@@ -23,39 +25,54 @@ switch ($acc) {
         break;
 }
 //add cart
-if (isset($_POST["add_to_cart"])) {
-    if (isset($_SESSION["cart"])) {
-        $item_array_id = array_column($_SESSION["cart"], "item_id");
-        if (!in_array($_GET["id"], $item_array_id)) {
-            $count = count($_SESSION["cart"]);
-            $item_array = array(
-                'item_id' => $_GET["id"],
-                'item_name' => $_POST["hidden_name"],
-                'item_price' => $_POST["hidden_price"],
-                'item_quantity' => $_POST["quantity"]
-            );
-            $_SESSION["cart"][$count] = $item_array;
-        }
-    } else {
-        $item_array = array(
-            'item_id' => $_GET["id"],
-            'item_name' => $_POST["hidden_name"],
-            'item_price' => $_POST["hidden_price"],
-            'item_quantity' => $_POST["quantity"]
-        );
-        $_SESSION["cart"][0] = $item_array;
+if (!empty($_GET["action"])) {
+    switch ($_GET["action"]) {
+        case "add":
+            if (!empty($_POST["quantity"])) {
+                $productByCode = $db_handle->runQuery("SELECT * FROM tblaptoplist WHERE idProduct='" . $_GET["id"] . "'");
+                $itemArray = array($productByCode[0]["idProduct"] => array(
+                        'name' => $productByCode[0]["nameProduct"],
+                        'code' => $productByCode[0]["idProduct"],
+                        'quantity' => $_POST["quantity"],
+                        'price' => $productByCode[0]["rate"]
+                    )
+                );
+
+                if (!empty($_SESSION["cart_item"])) {
+                    if (in_array($productByCode[0]["idProduct"], array_keys($_SESSION["cart_item"]))) {
+                        foreach ($_SESSION["cart_item"] as $k => $v) {
+                            if ($productByCode[0]["idProduct"] == $k) {
+                                if (empty($_SESSION["cart_item"][$k]["quantity"])) {
+                                    $_SESSION["cart_item"][$k]["quantity"] = 0;
+                                }
+                                $_SESSION["cart_item"][$k]["quantity"] += $_POST["quantity"];
+                            }
+                        }
+                    } else {
+                        $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"], $itemArray);
+                    }
+                } else {
+                    $_SESSION["cart_item"] = $itemArray;
+                }
+            }
+            break;
+        case "remove":
+            if (!empty($_SESSION["cart_item"])) {
+                foreach ($_SESSION["cart_item"] as $k => $v) {
+                    if ($_GET["id"] == $k)
+                        unset($_SESSION["cart_item"][$k]);
+                    if (empty($_SESSION["cart_item"]))
+                        unset($_SESSION["cart_item"]);
+                }
+            }
+            break;
+        case "empty":
+            unset($_SESSION["cart_item"]);
+            header("location: index.php");
+            break;
     }
 }
 
-if (isset($_GET["action"])) {
-    if ($_GET["action"] == "delete") {
-        foreach ($_SESSION["cart"] as $keys => $values) {
-            if ($values["item_id"] == $_GET["id"]) {
-                unset($_SESSION["cart"][$keys]);
-            }
-        }
-    }
-}
 //end add cart
 //add promo code
 $code_promo_n = "";
@@ -76,7 +93,16 @@ switch ($code_promo_n) {
         break;
 }
 //end add promo code
-
+//get final price
+//if(isset($_POST["action"])){
+//    if($_POST["action"] == 'submitCart'){
+//        $_SESSION["final_total"] = $total_promo;
+//    }
+//}
+if (isset($_POST["submitCart"])) {
+    $final_total = $_POST["total_pro"];
+}
+//end final price
 ?>
 <!DOCTYPE html>
 <!--
