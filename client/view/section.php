@@ -19,7 +19,7 @@
                                                 <input type="hidden" name="quantity" value="1"/>
                                                 <input type="hidden" name="nameProduct" value="<?php echo $values["nameProduct"]; ?>" />
                                                 <input type="hidden" name="rate" value="<?php echo $values["rate"]; ?>" />
-                                                <a class="item-img"  href="product_info.php?id=<?php echo $values['idProduct']; ?>"><img src="../../image/Screen_Image/testposition.jpg" alt="Image Product"></a>
+                                                <a class="item-img"  href="?view=detail&id=<?php echo $values['idProduct']; ?>"><img src="../../image/Screen_Image/testposition.jpg" alt="Image Product"></a>
                                                 
                                                 <a class="add-card-btn" name="add_to_cart" href="index.php?action=add&id=<?php echo $values['idProduct']; ?>"><span class="fa fa-shopping-cart"></span><input type="submit" name="add_to_cart" value="Thêm vào giỏ hàng"></a>
                                                 <figcaption >
@@ -66,7 +66,7 @@
                                                 <input type="hidden" name="quantity" value="1" class="form-control" />
                                                 <input type="hidden" name="hidden_name" value="<?php echo $values["nameProduct"]; ?>" />
                                                 <input type="hidden" name="hidden_price" value="<?php echo $values["rate"]; ?>" />
-                                                <a class="item-img" href="product_info.php?id=<?php echo $values['idProduct']; ?>"><img src="#" alt="Image Product"></a>
+                                                <a class="item-img" href="?view=detail&id=<?php echo $values['idProduct']; ?>"><img src="#" alt="Image Product"></a>
 
                                                 <a class="add-card-btn" name="add_to_cart" href="index.php?action=add&id=<?php echo $values['idProduct']; ?>"><span class="fa fa-shopping-cart"></span><input type="submit" name="add_to_cart" value="Thêm vào giỏ hàng"></a>
                                                 <figcaption >
@@ -105,7 +105,7 @@
                                                 <input type="hidden" name="quantity" value="1" class="form-control" />
                                                 <input type="hidden" name="hidden_name" value="<?php echo $values["nameProduct"]; ?>" />
                                                 <input type="hidden" name="hidden_price" value="<?php echo $values["rate"]; ?>" />
-                                                <a class="item-img" href="product_info.php?id=<?php echo $values['idProduct']; ?>"><img src="#" alt="Image Product"></a>
+                                                <a class="item-img" href="?view=detail&id=<?php echo $values['idProduct']; ?>"><img src="#" alt="Image Product"></a>
 
                                                 <a class="add-card-btn" name="add_to_cart" href="index.php?action=add&id=<?php echo $values['idProduct']; ?>"><span class="fa fa-shopping-cart"></span><input type="submit" name="add_to_cart" value="Thêm vào giỏ hàng"></a>
                                                 <figcaption >
@@ -146,7 +146,7 @@
             <div class="news-list">
                 <div class="grid-container">
                     <div class="item">
-                        <a href="news-item" target="_self" href="#" class="news-content">
+                        <a target="_self" href="index.php?view=new&id=" class="news-content">
                             <figure>
                                 <div class="news-item-img">
                                     <picture>
@@ -161,7 +161,7 @@
                         </a>
                     </div>
                     <div class="item">
-                        <a href="news-item" target="_self" href="#" class="news-content">
+                        <a target="_self" href="#" class="news-content">
                             <figure>
                                 <div class="news-item-img">
                                     <picture>
@@ -176,7 +176,7 @@
                         </a>
                     </div>
                     <div class="item">
-                        <a href="news-item" target="_self" href="#" class="news-content">
+                        <a target="_self" href="#" class="news-content">
                             <figure>
                                 <div class="news-item-img">
                                     <picture>
@@ -191,7 +191,7 @@
                         </a>
                     </div>
                     <div class="item">
-                        <a href="news-item" target="_self" href="#" class="news-content">
+                        <a target="_self" href="#" class="news-content">
                             <figure>
                                 <div class="news-item-img">
                                     <picture>
@@ -206,7 +206,7 @@
                         </a>
                     </div>
                     <div class="item">
-                        <a href="news-item" target="_self" href="#" class="news-content">
+                        <a target="_self" href="#" class="news-content">
                             <figure>
                                 <div class="news-item-img">
                                     <picture>
@@ -221,7 +221,7 @@
                         </a>
                     </div>
                     <div class="item">
-                        <a href="news-item" target="_self" href="#" class="news-content">
+                        <a target="_self" href="#" class="news-content">
                             <figure>
                                 <div class="news-item-img">
                                     <picture>

@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/WampServer/www/TechMedia/index.php</file>
-            <file>file:/C:/WampServer/www/TechMedia/client/view/payment.php</file>
-            <file>file:/C:/WampServer/www/TechMedia/library/css/style.css</file>
-            <file>file:/C:/WampServer/www/TechMedia/client/view/section.php</file>
-            <file>file:/C:/WampServer/www/TechMedia/client/view/header.php</file>
-            <file>file:/C:/WampServer/www/TechMedia/client/view/cart_view.php</file>
+            <file>file:/C:/WampServer/www/TechMedia/src/ul/admins/index.php</file>
+            <file>file:/C:/WampServer/www/TechMedia/src/ul/admins/library/css/main.css</file>
+            <file>file:/C:/WampServer/www/TechMedia/src/ul/admins/config/model/searchTableProduct.php</file>
+            <file>file:/C:/WampServer/www/TechMedia/src/ul/admins/view/Tab/product_Table.php</file>
+            <file>file:/C:/WampServer/www/TechMedia/src/ul/admins/view/tab.php</file>
         </group>
     </open-files>
 </project-private>

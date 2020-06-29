@@ -11,15 +11,28 @@ body{
     color:black;
     background: rgb(240, 240, 240);
     margin: 0;
-    padding: 0;
-    position: relative;
-    padding-bottom: 58px;
+    padding: 0!important;
     min-height: 100%;
-    
+    height: 100%;
+
 }
-/*main{
-    min-height: calc(100vh-211px-58px);
-}*/
+.footer {
+    clear: both;
+    position: relative;
+    height: 200px;
+    width: 100%;
+    background-color: rgb(34,34,34);
+    color: white;
+}
+main {
+  flex: 1;
+  min-height: 54%;
+}
+.container-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
 a{
     text-decoration: none;
@@ -42,11 +55,11 @@ a{
     min-height: 100px;
 
     background-color: white;
-    z-index: 1;
 }
-.nav-menu,.second-menu,.list-i,.list-ii{
-    z-index: 1;
+.nav-menu{
+    margin: 0;
 }
+
 .web-header .container {
     height: 100px;
     background-color: white;
@@ -79,7 +92,9 @@ a{
     height: 60px;
     display: block;
 }
-
+#fname{
+    margin: 0;
+}
 .web-header .container #main-header #right-header img {
     display: inline-block;
     margin-top: 15px;
@@ -102,19 +117,13 @@ a{
 /* Finish Header */
 
 /* Start footer */
-footer{
-    position: relative;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 200px;
-    background-color: rgb(34,34,34);
-}
+
+
 .footer .container{
     height: 200px;
     background-color: rgba(34, 34, 34, 0.5);
     color: aliceblue;
+    top: 100%;
 }
 .footer .container .left-footer-below p{
     margin-top: -10px;
@@ -156,7 +165,6 @@ footer{
 
 /*Finish footer*/
 /* css index pages */
-
 /*  Start navbar */
 .padding-0{
     padding-right:0;
@@ -206,7 +214,7 @@ footer{
 /* start menu content */
 .second-menu{
     margin-top: -20px;
-    height: 400px;
+    min-height: 100%;
 }
 .second-menu .container{
     height: 100%;
@@ -383,6 +391,7 @@ footer{
     max-width: 271px;
     width: 271px;
 }
+
 .block_item{
     height: 300px;
     min-height: 300px;
@@ -793,16 +802,23 @@ footer{
     height: 100%;
     width: 100%;
 }
-.row_cart .button_submit_cart .input_promo_code{
+.row_cart .promo_cart .input_promo_code{
     float: left;
 }
-.row_cart .button_submit_cart .input_promo_code button{
+.row_cart .promo_cart .input_promo_code button{
     width: 80px;
 }
-.row_cart .button_submit_cart .total_pay{
+.row_cart .promo_cart .total_pay{
     float: right;
     width: 300px;
     text-align: center;
+}
+.input_promo_code h3{
+    margin-top: 0;
+}
+.input_promo_code i a:hover{
+    color: red!important;
+    text-decoration: none;
 }
 /*End cart css*/
 
@@ -832,9 +848,7 @@ label {
 }
 
 .icon-container {
-    margin-bottom: 20px;
-    padding: 7px 0;
-    font-size: 24px;
+    font-size: 80px;
 }
 
 .btn {
@@ -866,4 +880,39 @@ span.price {
         margin-bottom: 20px;
     }
 }
+#momoBtn{
+    height: 80px!important;
+    width: 80px!important;  
+}
+#momoBtn img{
+    height: 100%;
+    width: 100%;
+}
+.btn_payment_icon div{
+    display: inline-block;
+}
+.icon-payment{
+    margin-top: -20px!important;
+}
+.payment{
+    height: 80!important;
+    width: 100px!important;
+    margin: 0!important;
+}
 /*End payment*/
+
+/*Search History*/
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+    bottom: .5em;
+}
+/*End Search History*/

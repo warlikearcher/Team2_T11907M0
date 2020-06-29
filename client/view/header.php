@@ -62,7 +62,6 @@
                     <ul class="nav navbar-nav" id="list-nav">
                         <li class="menu-list"><a href="?view=home">Trang chủ</a></li>
                         <li class="menu-list"><a href="?view=review">Giới thiệu</a></li>
-                        <li class="menu-list"><a href="?view=payment">Thanh Toán</a></li>
                         <li class="menu-list"><a href="?view=promo">Khuyến mãi</a></li>
                         <li class="menu-list"><a href="?view=contact">Liên hệ</a></li>
                         <li class="menu-list"><a href="?view=user">Tài khoản</a></li>
@@ -81,7 +80,9 @@
                     <?php
                 }
                 ?>
-
+                <ul class="nav navbar-nav cart_div" id="list-nav">
+                    <li class="menu-list"><a href="?view=orderQuery">Truy vấn đơn hàng</a></li>
+                </ul>
             </div>
         </div>
     </div>

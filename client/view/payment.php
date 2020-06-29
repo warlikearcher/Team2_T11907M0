@@ -3,21 +3,22 @@
     <div class="row ">
         <div class="col-md-8">
             <div class="paycontainer">
-                <form action="/action_page.php">
+                <form action="/TechMedia/config/model/addOrder_db.php" method="post">
 
                     <div class="row">
                         <div class="col-50">
                             <h3>Địa chỉ giao hàng</h3>
+                            <input type="hidden" name="total_final" value="<?php echo $final_total; ?>">
                             <label for="fname"><i class="fa fa-user"></i> Tên đầy đủ</label>
-                            <input type="text" id="fname" name="firstname" placeholder="Nguyễn Văn Trần Hòa">
+                            <input type="text" id="fname" name="firstname" placeholder="Nguyễn Văn Trần Hòa" >
                             <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                            <input type="text" id="email" name="email" placeholder="mmosuper25@gmail.com">
+                            <input type="text" id="email" name="email" placeholder="mmosuper25@gmail.com" >
                             <label for="email"><i class="fa fa-phone"></i> Số điện thoại</label>
-                            <input type="text" id="phone" name="phone" placeholder="0123456789" pattern="[0-9]{10}">
+                            <input type="text" id="phone" name="phone" placeholder="0123456789" pattern="[0-9]{10}" >
                             <label for="email"><i class="fa fa-address-book-o"></i> Địa chỉ đường</label>
-                            <input type="text" id="adr" name="address" placeholder="590 CMT8">
+                            <input type="text" id="adr" name="address" placeholder="590 CMT8" >
                             <label for="city"><i class="fa fa-institution"></i> Thành phố</label>
-                            <input type="text" id="city" name="city" placeholder="Hồ Chí Minh city">
+                            <input type="text" id="city" name="city" placeholder="Hồ Chí Minh city" >
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -82,7 +83,7 @@
                     <label>
                         <input type="checkbox" checked="checked" name="sameadr"> Hàng đính kèm hóa đơn 
                     </label>
-                    <input type="submit" value="Xác nhận đặt hàng" class="btn">
+                    <input type="submit" value="Xác nhận đặt hàng" name="btnSubmit" class="btn">
                 </form>
             </div>
         </div>
@@ -117,6 +118,8 @@
                     }
                     ?>
                 </div>
+                <h3>Phí vận chuyển: <span class="price" style="color:red"><b>24.000đ</b></span></h3>
+                <h5>Miễn phí vận chuyển đổi với thành viên: <a href="?view=register">Đăng ký ngay</a></h5>
                 <hr>
                 <h2>Tổng tiền cần thanh toán: <span class="price" style="color:red"><b><?php echo number_format($final_total,0); ?></b></span></h2>
             </div>

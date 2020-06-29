@@ -310,8 +310,8 @@ switch ($ref) {
         break;
 //    end ref graphics
     default :
-        header('location: \..\controllers\error502.php');
-        break;
+        header("Location: error502.php");
+        exit();
 }
 //end get ref
 ?>

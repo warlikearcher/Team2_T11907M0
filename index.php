@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include_once (__DIR__ . "..\config\database\connectDB.php");
 require (__DIR__ . "..\config\model\load_random.php");
 require_once("dbcontroller.php");
@@ -29,7 +30,57 @@ if (!empty($_GET["action"])) {
     switch ($_GET["action"]) {
         case "add":
             if (!empty($_POST["quantity"])) {
-                $productByCode = $db_handle->runQuery("SELECT * FROM tblaptoplist WHERE idProduct='" . $_GET["id"] . "'");
+                $productByCode = $db_handle->runQuery("SELECT
+    *
+FROM
+    (
+        (
+        SELECT
+            tbcpulist.idProduct,
+            tbcpulist.nameProduct,
+            tbcpulist.rate
+        FROM
+            tbcpulist
+    )
+UNION
+    (
+    SELECT
+        tbgraphicslist.idProduct,
+        tbgraphicslist.nameProduct,
+        tbgraphicslist.rate
+    FROM
+        tbgraphicslist
+)
+UNION
+    (
+    SELECT
+        tblaptoplist.idProduct,
+        tblaptoplist.nameProduct,
+        tblaptoplist.rate
+    FROM
+        tblaptoplist
+)
+UNION
+    (
+    SELECT
+        tbramlist.idProduct,
+        tbramlist.nameProduct,
+        tbramlist.rate
+    FROM
+        tbramlist
+)
+UNION
+    (
+    SELECT
+        tbradiatorslist.idProduct,
+        tbradiatorslist.nameProduct,
+        tbradiatorslist.rate
+    FROM
+        tbradiatorslist
+)
+    ) AS r
+WHERE
+    r.idProduct ='" . $_GET["id"] . "'");
                 $itemArray = array($productByCode[0]["idProduct"] => array(
                         'name' => $productByCode[0]["nameProduct"],
                         'code' => $productByCode[0]["idProduct"],
@@ -61,6 +112,7 @@ if (!empty($_GET["action"])) {
                 foreach ($_SESSION["cart_item"] as $k => $v) {
                     if ($_GET["id"] == $k)
                         unset($_SESSION["cart_item"][$k]);
+                    header("Location: index.php?view=cart");
                     if (empty($_SESSION["cart_item"]))
                         unset($_SESSION["cart_item"]);
                 }
@@ -100,7 +152,7 @@ switch ($code_promo_n) {
 //    }
 //}
 if (isset($_POST["submitCart"])) {
-    $final_total = $_POST["total_pro"];
+    $final_total = $_POST["total_pro"] + 24000;
 }
 //end final price
 ?>
@@ -117,6 +169,10 @@ and open the template in the editor.
         <link rel="stylesheet" href="library/css/bootstrap.min.css">
         <link rel="stylesheet" href="library/css/style.css">
         <link rel="stylesheet" href="library/css/font-awesome.min.css">
+
+        <link rel="stylesheet" type="text/css" href="library/css/product-details.css">
+        <link rel="stylesheet" type="text/css" href="library/css/owl.carousel.min.css">
+        <link rel="stylesheet" type="text/css" href="library/css/smoothproducts.css">
         <script src="library/js/jquery.min.js"></script>
         <script src="library/js/jquery-3.2.1.min.js"></script>
         <script src="library/js/bootstrap.min.js"></script>
@@ -163,8 +219,8 @@ and open the template in the editor.
                 case "product":
                     include 'client/section_product.php';
                     break;
-                case "product_inf":
-                    include 'client/section_product_inf.php';
+                case "detail":
+                    include 'client/product_detail.php';
                     break;
                 case "promo":
                     include 'client/view/promo.php';
@@ -181,16 +237,28 @@ and open the template in the editor.
                 case "payment":
                     include 'client/view/payment.php';
                     break;
+                case "orderQuery":
+                    include 'client/view/orderQuery.php';
+                    break;
                 default :
                     include 'client/view/vertical_menu.php';
                     include 'client/view/section.php';
                     break;
             }
+//            if (isset($error) && $error = 'error') {
+//                header('Location: error505.php');
+//                exit();
+//            }
             ?>
         </main>
 
         <?php
         include 'client/view/footer.php';
+        ?>
+        <?php
+        if ($view == 'detail') {
+            include './library/js/detail.js';
+        }
         ?>
     </body> 
 </html>

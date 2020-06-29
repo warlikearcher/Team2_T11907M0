@@ -311,7 +311,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                                 <input type="hidden" name="quantity" value="1" class="form-control" />
                                                 <input type="hidden" name="hidden_name" value="<?php echo $values["nameProduct"]; ?>" />
                                                 <input type="hidden" name="hidden_price" value="<?php echo $values["rate"]; ?>" />
-                                                <a class="item-img" href="product_info.php?id=<?php echo $values['idProduct']; ?>"><img src="#" alt="Image Product"></a>
+                                                <a class="item-img" href="?view=detail&id=<?php echo $values['idProduct']; ?>"><img src="#" alt="Image Product"></a>
 
                                                 <a class="add-card-btn" name="add_to_cart" href="index.php?action=add&id=<?php echo $values['idProduct']; ?>"><span class="fa fa-shopping-cart"></span><input type="submit" name="add_to_cart" value="Thêm vào giỏ hàng"></a>
                                                 <figcaption >
@@ -350,16 +350,16 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         }
                         $end_loop = $start_loop + 1;
                         if ($page > 1) {
-                            echo "<a href='product.php?view=product&ref=" . $ref . "&page=1'>First</a>";
-                            echo "<a href='product.php?view=product&ref=" . $ref . "&page=" . ($page) . "'><<</a>";
+                            echo "<a href='index.php?view=product&ref=" . $ref . "&page=1'>First</a>";
+                            echo "<a href='index.php?view=product&ref=" . $ref . "&page=" . ($page) . "'><<</a>";
                         }
                         for ($i = $start_loop + 1; $i <= $end_loop + 1; $i++) {
-                            echo "<a href='product.php?view=product&ref=" . $ref . "&page=" . $i . "'>" . $i . "</a>";
+                            echo "<a href='index.php?view=product&ref=" . $ref . "&page=" . $i . "'>" . $i . "</a>";
                             echo "  ";
                         }
                         if ($page <= $end_loop) {
-                            echo "<a href='product.php?view=product&ref=" . $ref . "&page=" . ($page + 1) . "'>>></a>";
-                            echo "<a href='product.php?view=product&ref=" . $ref . "&page=" . $total_pages . "'>Last</a>";
+                            echo "<a href='index.php?view=product&ref=" . $ref . "&page=" . ($page + 1) . "'>>></a>";
+                            echo "<a href='index.php?view=product&ref=" . $ref . "&page=" . $total_pages . "'>Last</a>";
                         }
                         ?>
 
