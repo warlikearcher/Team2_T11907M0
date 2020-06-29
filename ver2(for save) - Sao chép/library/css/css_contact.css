@@ -1,0 +1,8 @@
+
+body .sectionContact .container .button {
+    display: block;
+    margin: 30px auto;
+    background: transparent;
+    border: none;
+}
+
